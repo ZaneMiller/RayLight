@@ -1,0 +1,226 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title>Using RayLight for Unity</title>
+		<link rel="stylesheet" href="css/highlight/monokai.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/main.css">
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<script src="js/highlight.pack.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+	</head>
+<body>
+	<div class="container-fluid" id="main-container">
+		<div class="row">
+			<div class="jumbotron">
+				<h1 class="col-xs-10 col-xs-offset-1">RayLight</h1>
+				<p class="col-xs-10 col-xs-offset-1">
+					Using RayLight to achive 2D shaftlighting in Unity3D.
+				</p>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-10 col-xs-offset-1 alert alert-warning">
+				<strong>Warning:</strong> This set of scripts is currently untested on anything other than very small scenes. <i>Use at your own risk.</i>
+			</div>
+		</div>
+
+		<div class="row text-center" id="nav">
+			<a href="#the-files">The Files</a>
+			|
+			<a href="#basic-usage">Basic Usage</a>
+			|
+			<a href="#download">Downloads</a>
+		</div>
+
+
+		<div class="row" id="the-files">
+			<div class="col-xs-10 col-xs-offset-1">
+				<div class="page-header">
+					<h1>The Files <small>What you will find in the pacakge</small></h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-10 col-xs-offset-1">
+				<ul>
+					<li>
+						<img src="img/CSharp.png" alt="C#"><strong class="label label-primary">RayLight.cs</strong>
+						<ul>
+							<li>Identifies a GameObject as a light source</li>
+						</ul>
+					</li>
+					<li>
+						<img src="img/CSharp.png" alt="C#"><strong class="label label-primary">RayLightVertex.cs</strong>
+						<ul>
+							<li>Marks a GameObject as an enpoint that light rays should be cast towards</li>
+						</ul>
+					</li>
+					<li>
+						<img src="img/CSharp.png" alt="C#"><strong class="label label-primary">RayLightRenderer.cs</strong>
+						<ul>
+							<li>The script attached to a Camera which performs the actual light rendering</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="row" id="basic-usage">
+			<div class="col-xs-10 col-xs-offset-1">
+				<div class="page-header">
+					<h1>Basic Usage</h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-10 col-xs-offset-1">
+				<p>
+					There are four steps (one for each script and a some general guidelines) that must be taken for RayLight to work correctly:
+				</p>
+				<ol>
+					<li><a href="#light-setup">Light Setup</a></li>
+					<li><a href="#vertex-setup">Vertex Setup</a></li>
+					<li><a href="#camera-setup">Camera Setup</a></li>
+					<li><a href="#scene-setup">Final Steps</a></li>
+				</ol>
+			</div>
+		</div>
+
+		<div class="row" id="light-setup">
+			<div class="col-xs-9 col-xs-offset-2">
+				<div class="page-header">
+					<h2>1. Light Setup</h2>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-9 col-xs-offset-2">
+				<p>
+					Lighting setup is straightforward; the <strong class="label label-primary">RaycastLight.cs</strong> script must be applied to a GameObject from which light should be cast.
+					<br>
+					It is best apply this to an empty GameObject as the transform of the object is used to determine the light source.
+					<br>
+				</p>
+				<h3>Properties:</h3>
+				<ul>
+					<li>
+						<p>
+							<strong class="label label-success">Mat</strong> The Material that will be used as the texture for this light.
+						</p>
+					</li>
+					<li>
+						<p>
+							<strong class="label label-success">Range</strong> The radius that the light source will cast light.
+						</p>
+					</li>
+					<li>
+						<p>
+							<strong class="label label-success">Layer Mask</strong> The layer mask can be used to select which layers in the scene should interput the light.
+						</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="row" id="vertex-setup">
+			<div class="col-xs-9 col-xs-offset-2">
+				<div class="page-header">
+					<h2>2. Vertex Setup</h2>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-9 col-xs-offset-2">
+				<p>
+					In order for the lights to render they have to know the endpoints of objects that they will intercept. This is done in two ways, by either assigning the <strong class="label label-primary">RayLightVertex.cs</strong> script to vertices that should act as endpoints, or to a parent object whose children should act as the endpoints (recommended).
+				</p>
+				<p>
+					The vertexes that will be used for endpoints should be placed on the logical vertices of the object casting the shadow. For example, if using a square you would place the vertices at the four corners of the square.
+				</p>
+				<div class="alert alert-info">
+					<strong>Note:</strong> At this time circle shapes are not supported. You can attempt to simulate the behavoir by placing vertexes around the edge of the circle, but results and preformance may vary.
+				</div>
+				<h3>Properties:</h3>
+				<ul>
+					<li>
+						<p>
+							<strong class="label label-success">Use Children</strong> If checked the transform of each child of the GameObject will be used as a lighted endpoint, otherwise the transform of the object itself will be used.
+						</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="row" id="camera-setup">
+			<div class="col-xs-9 col-xs-offset-2">
+				<div class="page-header">
+					<h2>3. Camera Setup</h2>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-xs-9 col-xs-offset-2">
+				<p>
+					For lighting to correctly render under the scene (as opposed to on top of the scene) it must be rendered on a separte camera. The simpilest way to achieve this effect is by attaching a second Camera with the <strong class="label label-primary">RayLightRenderer.cs</strong> script to the Main Camera.
+				</p>
+				<p>
+					For correct rendering some changes must be made to the clear flags on the camera. On the <strong class="label label-warning">Main Camera</strong> change <strong class="label label-success">Clear Flags</strong> to <i>Don't Clear</i>; this will allow for the scene to be drawn on top of the lights, which will already have rendered at the time the main scene is rendered.
+				</p>
+
+				<p>
+					On the child camera (the one with the script attached) set the settings to what you normally use for your camera, except set <strong class="label label-success">Culling Mask</strong> to <i>Nothing</i>. This will prevent the child camera rendering anything except for the lights.
+				</p>
+				<div class="alert alert-info">
+					<strong>Note:</strong> I am far from knowledgeable about cameras in Unity. There is probably a good way to achive some cool effects (such as lights drawing over certain objects, but not others) but it is up to you to figure them out.
+				</div>
+			</div>
+		</div>
+
+		<div class="row" id="scene-setup">
+			<div class="col-xs-9 col-xs-offset-2">
+				<div class="page-header">
+					<h2>4. Final Steps</h2>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-9 col-xs-offset-2">
+				<p>
+					There are some important considerations when setting up your scene for RayLight lighting.
+				</p>
+				<p>
+					First off, lights do not take each other into consideration. This means that if you place your lights so that their rays will overlap, that will be evident in the scene, assuming the light texture uses transparency.
+				</p>
+				<p>
+					Secondly, the light will only cast towards vertices as specified by the <strong class="label label-primary">RayLightVertex.cs</strong> script. The lights will, however, try to draw in a circular fashion. This means if you do not define some boundry for your light area strange results might occur. This is best remedied by making sure you place your lights in an area with clear bounds. The bounds do not need to be visible in your play area, they simply need to be in range of the camera.
+					<br>
+					You can see an example of how this might be done below. Note how even though level bounds exist they are in range of the light but not visible to the camera.
+				</p>
+				<img src="img/scene_ex.png" alt="Scene Example" class="full-image">
+				<p>
+					Because of these considerations it is best to try to keeps lights separated in to distinct play areas, such as separate rooms. It is also theoretically possible to attach light endpoints to the edge of the viewport of the camera, to make sure the lights will always fill out the visible area of the screen. This may have varying results and has not been tested. 
+				</p>
+			</div>
+		</div>
+
+		<div class="row" id="download">
+			<div class="col-xs-10 col-xs-offset-1">
+				<div class="page-header">
+					<h1>Downloads</h1>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

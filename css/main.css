@@ -1,0 +1,56 @@
+body
+{
+	margin: 0;
+	background: url('../img/stardust.png'), fixed;
+	color: white;
+}
+
+#main-container
+{
+	padding: 0;
+}
+
+.jumbotron
+{
+	color: black;
+}
+
+.jumbotron > h1
+{
+	color: #5FAA4B;
+}
+
+.page-header 
+{
+	border-bottom-color: #5FAA4B;
+}
+
+ul
+{
+	list-style: none;
+}
+
+ul > li
+{
+	margin-bottom: 25px;
+}
+
+a
+{
+	color: #EBF89F;
+}
+
+a:hover
+{
+	color: #F6F8D2;
+}
+
+#nav
+{
+	font-size: 150%;
+}
+
+.full-image
+{
+	width: 100%;
+}
