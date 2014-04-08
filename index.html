@@ -4,9 +4,16 @@
 	<head>
 		<title>Using RayLight for Unity</title>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="fancybox/source/jquery.fancybox.css">
 		<link rel="stylesheet" href="css/main.css">
 		<script src="js/jquery-1.11.0.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script src="fancybox/source/jquery.fancybox.pack.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$('.fancybox').fancybox();
+			});
+		</script>
 	</head>
 	<body>
 		<div class="container-fluid" id="main-container">
@@ -27,6 +34,8 @@
 			</div>
 
 			<div class="row text-center" id="nav">
+				<a href="#examples">Examples</a>
+				|
 				<a href="#the-files">The Files</a>
 				|
 				<a href="#basic-usage">Basic Usage</a>
@@ -34,6 +43,35 @@
 				<a href="#download">Downloads</a>
 			</div>
 
+			<div class="row" id="examples">
+				<div class="col-xs-10 col-xs-offset-1">
+					<div class="page-header">
+						<h1>Examples</h1>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-10 col-xs-offset-1">
+					<p>
+						Below you will find some examples of what the code is capable of to help determine if it is correct for your project. This is only a limited subset of what is possible, so let your mind run wild. You can click any of the images to expand them.
+					</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<a class="fancybox col-xs-2 col-xs-offset-2" rel="group" href="img/RayLightStatic.jpg"><img class="full-image" src="img/RayLightStatic.jpg" alt="Static Scene" /></a>
+				<a class="fancybox col-xs-2" rel="group" href="img/RayLightDynObj.gif"><img class="full-image" src="img/RayLightDynObj.gif" alt="Dynamic Objects" /></a>
+				<a class="fancybox col-xs-2" rel="group" href="img/RayLightSwing.gif"><img class="full-image" src="img/RayLightSwing.gif" alt="Dynamic Light" /></a>
+				<a class="fancybox col-xs-2" rel="group" href="img/RayLightSwingDyn.gif"><img class="full-image" src="img/RayLightSwingDyn.gif" alt="Dynamic Light and Objects" /></a>
+			</div>
+
+			<div class="row text-center">
+				<div class="col-xs-2 col-xs-offset-2">Static Scene</div>
+				<div class="col-xs-2">Dynamic Objects</div>
+				<div class="col-xs-2">Dynamic Light</div>
+				<div class="col-xs-2">Dynamic Everything!</div>
+			</div>
 
 			<div class="row" id="the-files">
 				<div class="col-xs-10 col-xs-offset-1">
